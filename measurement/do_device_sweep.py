@@ -17,7 +17,7 @@ def do_device_sweep(
         t_set=-1,
         timeout=-1, wait=0.5,
         return_data=False, make_plot=True,
-        socket_data_number=2,  # 5 for 9T, 2 for Dilution fridge
+        socket_data_number=5,  # 5 for 9T, 2 for Dilution fridge
         comment="No comment!", network_dir="Z:\\DATA"
 ):
     """Device sweep"""

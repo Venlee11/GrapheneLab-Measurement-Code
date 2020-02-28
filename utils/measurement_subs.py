@@ -43,8 +43,8 @@ def initialize_sockets():
 	t_client = socket_subs.SockClient('localhost', 18871)
 	m_client = socket_subs.SockClient('localhost', 18861)
 	time.sleep(4)
-	m_socket = [0.0, 0]
-	t_socket = [0.0, 0]
+	m_socket = [[0.0], 0]
+	t_socket = [[0.0, 0.0, 0.0, 0.0], 0]
 	m_socket = socket_read(m_client, m_socket)
 	t_socket = socket_read(t_client, t_socket)
 	
@@ -63,9 +63,9 @@ def socket_read(client, old_socket=[]):
 	if socket_string:
 		socket_string = socket_string.split(",")[-1]
 		socket_string = socket_string.split(" ")
-		if len(socket_string) == 2:
-			value = socket_string[:-1]
-			status = socket_string[-1]
+		value = socket_string[:-1]
+		status = socket_string[-1]
+		if len(value) == len(old_socket[0]):
 			try:
 				for i, v in enumerate(value):
 					value[i] = float(v)
@@ -130,7 +130,7 @@ def open_csv_file(
 	file_writer.writerow([start_time])
 	csv_file.flush()
 
-	column_string = "B (T), T(K)"
+	column_string = "B (T), T-VTI (K), T-Sample (K), Heater VTI (%), Heater Sample (%)"
 	
 	for inst in sweep_inst:
 		csv_file.write("".join(("SWEEP: ", inst.description())))
@@ -138,7 +138,7 @@ def open_csv_file(
 
 	for inst in set_inst:
 		csv_file.write("".join(("SET: ", inst.description())))
-		column_string = "".join((column_string, ", ", inst.source))
+		column_string = "".gn((column_string, ", ", inst.source))
 
 	for inst in read_inst:
 		csv_file.write("".join(("READ: ", inst.description())))
