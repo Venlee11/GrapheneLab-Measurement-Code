@@ -16,7 +16,7 @@ def do_fridge_sweep(
         persist=False,  # Magnet final state
         delay=0.0, sample=1,
         timeout=-1, wait=0.5, max_over_time=5,
-        return_data=False, socket_data_number=2,
+        return_data=False, socket_data_number=5,
         comment="No comment!", network_dir="Z:\\DATA",
         ignore_magnet=False
 ):
